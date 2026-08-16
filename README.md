@@ -159,13 +159,13 @@ Instead of reading a list of times, you can visually understand how your availab
 
 ```text
 0m          10m          20m          30m          35m
-```
 
 │────────────│────────────│────────────│────────────│
 
 │   TASK A   │   TASK B   │ TASK C │   BUFFER     │
 
 │────────────│────────────│─────────│··············│
+```
 
 The timeline makes time allocation immediately understandable.
 
@@ -260,11 +260,9 @@ Add the things you could potentially accomplish.
 
 ```text
 Finish assignment       20 min   HIGH
-```
-
 Review presentation     15 min   MEDIUM
-
 Reply to emails          5 min   LOW
+```
 
 ---
 
@@ -304,71 +302,39 @@ The agent performs three primary operations:
 
 ```text
 Context + Task
-```
-
-```
-  ↓
-```
-
+      ↓
 AI Reasoning
-
-```
-  ↓
-```
-
+      ↓
 Estimated Duration
+```
 
 ### Timeline Optimization
 
 ```text
 Context
-```
-
-*
-
+   +
 Available Time
-
-*
-
+   +
 Tasks
-
-↓
-
+   ↓
 AI Planning Agent
-
-↓
-
+   ↓
 Optimized Timeline
+```
 
 ### Dynamic Replanning
 
 ```text
 Previous Plan
-```
-
-```
-  +
-```
-
+      +
 New Time Constraint
-
-```
-  +
-```
-
+      +
 Original Tasks
-
-```
-  ↓
-```
-
+      ↓
 AI Replanning
-
-```
-  ↓
-```
-
+      ↓
 Updated Timeline
+```
 
 The AI output is additionally validated before being presented to the user.
 
@@ -378,120 +344,75 @@ The AI output is additionally validated before being presented to the user.
 
 ```text
 ┌───────────────────────────────┐
-```
-
 │          WaitWise UI          │
-
 │       Next.js + React         │
-
 └───────────────┬───────────────┘
-
-```
-            │
-
-            ▼
-```
-
+                │
+                ▼
 ┌───────────────────────────────┐
-
 │        API Route Layer        │
-
 │                               │
-
 │  /api/estimate                │
-
 │  /api/optimize                │
-
 │  /api/replan                  │
-
 └───────────────┬───────────────┘
-
-```
-            │
-
-            ▼
-```
-
+                │
+                ▼
 ┌───────────────────────────────┐
-
 │       WaitWise Agent          │
-
 │                               │
-
 │  Duration Estimation          │
-
-│  Timeline Optimization       │
-
+│  Timeline Optimization        │
 │  Dynamic Replanning           │
-
 └───────────────┬───────────────┘
-
-```
-            │
-
-            ▼
-```
-
+                │
+                ▼
 ┌───────────────────────────────┐
-
 │        Gemini 2.5 Flash       │
-
 │        AI Planning Layer      │
-
 └───────────────┬───────────────┘
-
-```
-            │
-
-            ▼
-```
-
+                │
+                ▼
 ┌───────────────────────────────┐
-
 │   Structured JSON Response    │
-
 │                               │
-
 │  Zod Validation               │
-
 │  Deterministic Validation     │
-
 └───────────────────────────────┘
-
-````
+```
 
 ---
 
 # 🛠️ Tech Stack
 
-### Frontend
+## Frontend
 
-- **Next.js**
-- **React**
-- **TypeScript**
-- **Tailwind CSS**
-- **Lucide React**
+* **Next.js**
+* **React**
+* **TypeScript**
+* **Tailwind CSS**
+* **Lucide React**
 
-### AI
+## AI
 
-- **Google Gemini 2.5 Flash**
-- Structured JSON generation
-- AI planning and replanning
+* **Google Gemini 2.5 Flash**
+* Structured JSON generation
+* AI planning and replanning
 
-### Validation
+## Validation
 
-- **Zod**
-- Deterministic plan validation
-- Runtime response validation
+* **Zod**
+* Deterministic plan validation
+* Runtime response validation
 
-### State & Storage
+## State & Storage
 
-- React state
-- Browser `localStorage`
+* React state
+* Browser `localStorage`
 
-### Deployment
+## Deployment
 
-- **Vercel**
+* **Vercel**
 
 ---
 
@@ -499,111 +420,61 @@ The AI output is additionally validated before being presented to the user.
 
 ```text
 waitwise/
-````
-
 │
-
 ├── app/
-
 │   ├── api/
-
 │   │   ├── estimate/
-
 │   │   │   └── route.ts
-
+│   │   │
 │   │   ├── optimize/
-
 │   │   │   └── route.ts
-
+│   │   │
 │   │   └── replan/
-
 │   │       └── route.ts
-
 │   │
-
 │   ├── globals.css
-
 │   ├── layout.tsx
-
 │   └── page.tsx
-
 │
-
 ├── components/
-
 │   ├── dashboard/
-
 │   │   ├── AgentInsight.tsx
-
 │   │   ├── Dashboard.tsx
-
 │   │   ├── ReplanNotice.tsx
-
 │   │   ├── TaskInput.tsx
-
 │   │   ├── TaskItem.tsx
-
 │   │   ├── TaskList.tsx
-
 │   │   ├── Timeline.tsx
-
 │   │   ├── TimelineTask.tsx
-
 │   │   ├── WaitingContext.tsx
-
 │   │   └── WaitingTimeControl.tsx
-
 │   │
-
 │   └── landing/
-
 │       └── Hero.tsx
-
 │
-
 ├── lib/
-
 │   ├── ai/
-
 │   │   ├── agent.ts
-
 │   │   ├── gemini.ts
-
 │   │   ├── prompts.ts
-
 │   │   └── schemas.ts
-
 │   │
-
 │   └── optimizer/
-
 │       └── planner.ts
-
 │
-
 ├── types/
-
 │   ├── plan.ts
-
 │   ├── session.ts
-
 │   └── task.ts
-
 │
-
 ├── assets/
-
 │   └── images/
-
 │
-
 ├── .env.example
-
 ├── .gitignore
-
 ├── package.json
-
 └── README.md
+```
 
 ---
 
@@ -667,9 +538,9 @@ http://localhost:3000
 
 # 🔐 Environment Variables
 
-| VariableDescription |                                                        |
-| ------------------- | ------------------------------------------------------ |
-| `GEMINI_API_KEY`    | Google Gemini API key used by the server-side AI agent |
+| Variable         | Description                                            |
+| ---------------- | ------------------------------------------------------ |
+| `GEMINI_API_KEY` | Google Gemini API key used by the server-side AI agent |
 
 The API key is accessed server-side and should never be exposed through client-side code.
 
@@ -705,11 +576,9 @@ You have:
 
 ```text
 Finish assignment        20 min   HIGH
-```
-
 Review presentation      15 min   MEDIUM
-
 Reply to emails           5 min   LOW
+```
 
 WaitWise might determine that completing all three is unrealistic once a safety buffer is considered.
 
@@ -717,17 +586,12 @@ It could produce:
 
 ```text
 ┌──────────────────────────────────────────┐
-```
-
 │          35 MINUTE WAITING WINDOW        │
-
 ├──────────────────────────────────────────┤
-
 │ Assignment │ Presentation │ Buffer       │
-
 │   20 min   │    10 min    │   5 min      │
-
 └──────────────────────────────────────────┘
+```
 
 Now imagine the waiting time suddenly drops to **12 minutes**.
 
@@ -735,21 +599,14 @@ Instead of manually rebuilding the schedule:
 
 ```text
 35 min
-```
-
-↓
-
+  ↓
 12 min
-
-↓
-
+  ↓
 AI REPLAN
-
-↓
-
+  ↓
 Highest-value task selected
-
-* safety buffer preserved
++ safety buffer preserved
+```
 
 That's the core experience WaitWise is designed around.
 
