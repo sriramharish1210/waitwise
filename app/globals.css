@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap');
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --bg-void:        #05070C;
+  --bg-base:        #080B12;
+  --bg-surface:     rgba(14,18,30,0.75);
+  --bg-glass:       rgba(18,24,40,0.60);
+  --bg-glass-hover: rgba(22,30,50,0.80);
+  --bg-elevated:    rgba(24,32,52,0.90);
+  --bg-input:       rgba(10,14,24,0.80);
+
+  --border-faint:   rgba(255,255,255,0.04);
+  --border-subtle:  rgba(255,255,255,0.07);
+  --border-default: rgba(255,255,255,0.11);
+  --border-strong:  rgba(255,255,255,0.18);
+  --border-accent:  rgba(99,149,255,0.30);
+
+  --text-primary:   #E8ECF4;
+  --text-secondary: #8B95AA;
+  --text-muted:     #4A5268;
+  --text-faint:     #252B3A;
+
+  /* Accent — electric periwinkle-blue */
+  --accent:         #6395FF;
+  --accent-bright:  #7BAEFF;
+  --accent-dim:     rgba(99,149,255,0.10);
+  --accent-glow:    rgba(99,149,255,0.20);
+  --accent-border:  rgba(99,149,255,0.25);
+
+  /* Semantic */
+  --success:        #3ECFA0;
+  --success-dim:    rgba(62,207,160,0.10);
+  --warning:        #F0A84A;
+  --warning-dim:    rgba(240,168,74,0.10);
+  --danger:         #F0706A;
+  --danger-dim:     rgba(240,112,106,0.08);
+  --buffer:         #7A6B9A;
+  --buffer-dim:     rgba(122,107,154,0.12);
+
+  /* Priority */
+  --p-high:         #F0706A;
+  --p-high-dim:     rgba(240,112,106,0.10);
+  --p-high-border:  rgba(240,112,106,0.22);
+  --p-med:          #F0A84A;
+  --p-med-dim:      rgba(240,168,74,0.10);
+  --p-med-border:   rgba(240,168,74,0.20);
+  --p-low:          #4A5268;
+  --p-low-dim:      rgba(74,82,104,0.12);
+  --p-low-border:   rgba(74,82,104,0.20);
+}
+
+/* ── Base reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv02","cv03","cv04","cv11";
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(99,149,255,0.25); }
+
+/* ── Input reset ────────────────────────────────────────────── */
+input, select, textarea, button { font-family: inherit; }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ── Slider ─────────────────────────────────────────────────── */
+input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; width: 100%; }
+input[type="range"]::-webkit-slider-runnable-track { height: 2px; background: rgba(255,255,255,0.08); border-radius: 1px; }
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--text-primary);
+  margin-top: -8px;
+  border: 2.5px solid var(--bg-void);
+  box-shadow: 0 0 0 1px rgba(99,149,255,0.3), 0 2px 8px rgba(0,0,0,0.5);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(99,149,255,0.2), 0 0 16px rgba(99,149,255,0.3);
+}
+input[type="range"]::-moz-range-track { height: 2px; background: rgba(255,255,255,0.08); border-radius: 1px; }
+input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--text-primary); border: 2.5px solid var(--bg-void);
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
+}
+@keyframes scanLine {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateX(500%); opacity: 0; }
+}
+@keyframes blockPulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.75; }
+}
+@keyframes shimmerShift {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes clockTick {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-4px); }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(99,149,255,0.15); }
+  50%       { box-shadow: 0 0 40px rgba(99,149,255,0.30); }
+}
+
+/* ── Animation classes ──────────────────────────────────────── */
+.anim-fade-up   { animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+.anim-fade-in   { animation: fadeIn 0.35s ease forwards; }
+.anim-slide-right { animation: slideRight 0.3s ease forwards; }
+.anim-pulse-dot { animation: pulseDot 2s ease-in-out infinite; }
+.anim-scan      { animation: scanLine 2.2s ease-in-out infinite; }
+.anim-block     { animation: blockPulse 1.6s ease-in-out infinite; }
+.anim-float     { animation: float 3s ease-in-out infinite; }
+.anim-glow      { animation: glow-pulse 2.5s ease-in-out infinite; }
+
+/* ── Glassmorphism surfaces ─────────────────────────────────── */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+}
+.glass:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-default);
+}
+.glass-elevated {
+  background: var(--bg-elevated);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+}
+.glass-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.glass-input:focus {
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-dim), inset 0 0 0 1px var(--accent-border);
+}
+
+/* ── Label / micro text ─────────────────────────────────────── */
+.label-micro {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Button base ────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; border: none; cursor: pointer;
+  font-family: inherit; font-weight: 600;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary {
+  background: var(--text-primary); color: var(--bg-void);
+  border-radius: 10px; padding: 12px 24px; font-size: 14px;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(232,236,244,0.15); }
+.btn-accent {
+  background: var(--accent-dim); color: var(--accent-bright);
+  border: 1px solid var(--accent-border); border-radius: 10px; padding: 10px 18px; font-size: 13px;
+}
+.btn-accent:hover { background: rgba(99,149,255,0.18); box-shadow: 0 0 16px rgba(99,149,255,0.15); }
+.btn-ghost {
+  background: none; color: var(--text-secondary);
+  border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 14px; font-size: 12px;
+}
+.btn-ghost:hover { border-color: var(--border-default); color: var(--text-primary); background: rgba(255,255,255,0.03); }
+
+/* ── Shimmer text gradient ──────────────────────────────────── */
+.shimmer-text {
+  background: linear-gradient(90deg, var(--text-primary) 30%, var(--accent-bright) 50%, var(--text-primary) 70%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
